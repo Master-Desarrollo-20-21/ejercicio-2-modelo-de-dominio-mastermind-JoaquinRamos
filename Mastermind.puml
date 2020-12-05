@@ -1,5 +1,5 @@
 
-@startuml
+@startuml name Mastermind_JoaquinRamos
 
 Mastermind *-down-> "2" Jugador
 Mastermind *-down- Tablero

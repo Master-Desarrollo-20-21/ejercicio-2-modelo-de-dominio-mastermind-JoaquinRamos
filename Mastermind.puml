@@ -1,61 +1,40 @@
-'@startuml
-'testdot
-'@enduml
-
-/'
-Relación de Herencia
-    Jugador --|> Adivinador
-
-Relación de Composición/Agregación Fuerte
-    Mastermind *-- "2" Jugador
-    Mastermind *--> "2" Jugador
-
-Relación de Agregación / Composición Débil
-    Mastermind o--  Jugador 
-    Turno o--> Adivinador
-    
-Relación de Uso
-    Turno -- Maestro 
-    Turno --> Maestro 
-    Turno <-- Maestro
-    Turno <--> Maestro  
-'/
 
 @startuml
 
-'note "Hola ¿qué tal?" as Nota1 
-Mastermind *-down- "2" Jugador
+Mastermind *-down-> "2" Jugador
 Mastermind *-down- Tablero
-Mastermind *-down- Turno
+Mastermind *-down-> Turno
 
 
 Jugador <|-down- Maestro
 Jugador <|-down- Adivinador
 
-Turno o-- Maestro
-Turno o-- Adivinador
+Turno --> "2" Jugador
 
 Tablero *-- CombinaciónSecreta
-Tablero *-- "0..15" CombinaciónPropuesta
-Tablero --> ComprobarCombinación 
+Tablero --> "0..10" CombinaciónPropuesta
+Tablero --> "1..10" ComprobarCombinación 
 
-CombinaciónSecreta --|> Combinación 
-CombinaciónPropuesta --|> Combinación 
+CombinaciónSecreta-up-|> Combinación 
+CombinaciónPropuesta -up-|> Combinación 
 
 Maestro --> ElegirCombinaciónSecreta
 ElegirCombinaciónSecreta --> CombinaciónSecreta
-Adivinador-->"1..15" ProponerCombinación
+Adivinador-->"1..10" ProponerCombinación
 ProponerCombinación --> CombinaciónPropuesta 
 
 ComprobarCombinación --> CombinaciónSecreta
 ComprobarCombinación --> CombinaciónPropuesta
 ComprobarCombinación --> Resultado
 
-Resultado *--> "0..5" FichitasNegras
-Resultado *--> "0..5" FichitasBlancas
+Resultado *--> "0..4" FichitasNegras
+Resultado *--> "0..4" FichitasBlancas
 
-Combinación *--> Posición
-Combinación *--> Color
+ResultadoFinal -up-|> Resultado
+
+Combinación *--> "4" Posición
+
+Posición *--> Color
 
 FichitasNegras *--> Posición
 
@@ -66,7 +45,4 @@ Amarilla -up-|> Color
 Rosas -up-|> Color
 Violeta -up-|> Color
 
-
 @enduml
-
-
